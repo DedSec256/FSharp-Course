@@ -11,3 +11,4 @@ module SimpleMath =
         for i in n..n+m
         -> 2.0 ** i
     ]
+
