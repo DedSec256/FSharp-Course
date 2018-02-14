@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp Course", "FSharp Course\FSharp Course.fsproj", "{27B10DE6-6711-430F-BB99-56105EBE24E7}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp first steps", "FSharp first steps\FSharp first steps.fsproj", "{0D5E96DC-57FD-42D4-B5D9-F58126DB4047}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{27B10DE6-6711-430F-BB99-56105EBE24E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27B10DE6-6711-430F-BB99-56105EBE24E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27B10DE6-6711-430F-BB99-56105EBE24E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27B10DE6-6711-430F-BB99-56105EBE24E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D5E96DC-57FD-42D4-B5D9-F58126DB4047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D5E96DC-57FD-42D4-B5D9-F58126DB4047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D5E96DC-57FD-42D4-B5D9-F58126DB4047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D5E96DC-57FD-42D4-B5D9-F58126DB4047}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
