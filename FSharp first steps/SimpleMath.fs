@@ -7,8 +7,7 @@ module SimpleMath =
 
     (* Task 1.4 *)
     let rec degreesOfTwoGenerator (n : float) (m : float) =
-        if (m >= 0.0) then 
-            degreesOfTwoGenerator n (m - 1.0) @ [2.0 ** (n + m)]
-        else []
+        if (m < 0.0) then [] 
+        else degreesOfTwoGenerator n (m - 1.0) @ [2.0 ** (n + m)]
 
   
