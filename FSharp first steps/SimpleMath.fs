@@ -6,9 +6,9 @@ module SimpleMath =
     let factorial n : int = [2..n] |> List.reduce (*) 
 
     (* Task 1.4 *)
-    let degreesOfTwoGenerator n m = 
-    [
-        for i in n..n+m
-        -> 2.0 ** i
-    ]
+    let rec degreesOfTwoGenerator (n : float) (m : float) =
+        if (m >= 0.0) then 
+            degreesOfTwoGenerator n (m - 1.0) @ [2.0 ** (n + m)]
+        else []
 
+  
