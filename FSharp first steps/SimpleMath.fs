@@ -7,7 +7,7 @@ module SimpleMath =
     
      (* Task 1.4 *)
      (* TODO: optimization *)
-     let rec degreesOfTwoGenerator (n : float) (m : float) =
+     let rec degreesOfTwoGenerator n m =
         if (m < 0.0) then []
         else degreesOfTwoGenerator n (m - 1.0) @ [2.0 ** (n + m)]
 
@@ -44,11 +44,17 @@ module SimpleMath =
 
         (* Standart square matrix multiply *)
         let matrixMuliply ((A : int list list), (B : int list list)) = 
+            let A1 = A.Item 1
+            let B1 = B.Item 1
+            let A01 = (A.Item 0).Item 1
+            let B01 = (B.Item 0).Item 1
+            let A11 = A1.Item 1
+            let B11 = B1.Item 1
             [
-                [ ( (A.Item 0).Item 0 * (B.Item 0).Item 0 ) + ( (A.Item 0).Item 1 * (B.Item 1).Item 0 );
-                  ( (A.Item 0).Item 0 * (B.Item 0).Item 1 ) + ( (A.Item 0).Item 1 * (B.Item 1).Item 1 ) ];
-                [ ( (A.Item 1).Item 0 * (B.Item 0).Item 0 ) + ( (A.Item 1).Item 1 * (B.Item 1).Item 0 );
-                  ( (A.Item 1).Item 0 * (B.Item 0).Item 1 ) + ( (A.Item 1).Item 1 * (B.Item 1).Item 1 ) ];
+                [ ( (A.Item 0).Item 0 * (B.Item 0).Item 0 ) + ( A01 * B1.Item 0 );
+                  ( (A.Item 0).Item 0 * B01 ) + ( A01 * A11 ) ];
+                [ ( A1.Item 0 * (B.Item 0).Item 0 ) + ( A11 * B1.Item 0 );
+                  ( A1.Item 0 * B01 ) + ( A11 * B11 ) ];
             ]
 
         (* Binary pow *)
