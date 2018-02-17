@@ -12,12 +12,12 @@ module SimpleMath =
         else degreesOfTwoGenerator n (m - 1.0) @ [2.0 ** (n + m)]
 
     (* Task 1.3 *)
-    let rec reverseSignature acc list =
-        match list with
-        | [] -> acc
-        | [x] -> x::acc
-        | head::tail -> reverseSignature (head::acc) tail 
+    let reverse list = 
+        let rec reverseSignature acc list =
+            match list with
+            | [] -> acc
+            | [x] -> x::acc
+            | head::tail -> reverseSignature (head::acc) tail 
 
-    (* Task 1.3 - carrying *)
-    let reverse list = reverseSignature [] list
+        reverseSignature [] list
         
