@@ -6,7 +6,6 @@ module SimpleMath =
      let (!) n : int = [2..n] |> List.reduce (*) 
     
      (* Task 1.4 *)
-     (* TODO: more optimization *)
      let degreesOfTwoGenerator n m =
         let rec accGenerator m acc = 
             if (m < 0) then []
