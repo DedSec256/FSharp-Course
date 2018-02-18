@@ -47,27 +47,22 @@ module SimpleMath =
      let fibonacci n = 
 
         (* Standart square matrix multiply *)
-        let matrixMuliply ((A : int list list), (B : int list list)) = 
-            let A1 = A.Item 1
-            let B1 = B.Item 1
-            let A01 = (A.Item 0).Item 1 (*  A = (A00 A01), B = (B00 B01)  *)
-            let B01 = (B.Item 0).Item 1 (*      (A10 A11)      (B10 B11)  *)
-            let A11 = A1.Item 1     
-            let B11 = B1.Item 1
-            [
-                [ ( (A.Item 0 ).Item 0 * (B.Item 0).Item 0 ) + ( A01 * B1.Item 0 );
-                  ( (A.Item 0 ).Item 0 * B01 ) + ( A01 * A11 ) ];
-                [ ( A1.Item 0 * (B.Item 0).Item 0 ) + ( A11 * B1.Item 0 );
-                  ( A1.Item 0 * B01 ) + ( A11 * B11 ) ];
-            ]
+        let matrixMuliply (A00, A01, A10, A11) (B00, B01, B10, B11) = 
+
+            (*  A = (A00 A01), B = (B00 B01)  *)
+            (*      (A10 A11)      (B10 B11)  *)
+
+            ( (A00 * B00) + (A01 * B10), (A00 * B01) + (A01 * A11),
+              (A10 * B00) + (A11 * B10), (A10 * B01) + (A11 * B11) )
 
         (* Binary pow *)
-        let rec fastMatrixPow (A : int list list) n =
+        let rec fastMatrixPow A n = 
             if   n = 1     then A
-            elif n % 2 = 0 then matrixMuliply (fastMatrixPow A (n / 2), fastMatrixPow A (n / 2))
-            else matrixMuliply (fastMatrixPow A (n - 1), A)
-        
-        ((fastMatrixPow [[0; 1];[1;1]] n).Item 1).Item 0 
-        
-        
+            elif n % 2 = 0 then 
+                 let B =  fastMatrixPow A (n / 2)
+                 matrixMuliply B B
+            else matrixMuliply (fastMatrixPow A (n - 1)) A
+            
+        let (_, _, c, _) = fastMatrixPow (0, 1, 1, 1) n
+        c
      
