@@ -10,6 +10,20 @@ module SimpleAlgorithms =
 
         multiplyAcc 1 x
 
+    (* Task 2.2 *)
+    let indexOf list x = 
+        let rec getIndex list start = 
+            match list with
+            | []  ->          None
+            | [a] ->
+                if a = x then Some(start) 
+                else          None
+            | h :: t -> 
+                if h = x then Some(start)
+                else getIndex t (start + 1)
+
+        getIndex list 0 
+
     (* Task 2.3 *)
     let isPalindrome s = 
         let rec areEqual (list1, list2) = 
