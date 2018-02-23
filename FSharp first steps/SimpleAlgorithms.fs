@@ -38,3 +38,5 @@ module SimpleAlgorithms =
 
         let list = Seq.toList s
         areEqual (list, List.rev list) 
+
+    
