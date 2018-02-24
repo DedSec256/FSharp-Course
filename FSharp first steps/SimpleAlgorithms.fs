@@ -15,9 +15,6 @@ module SimpleAlgorithms =
         let rec getIndex list start = 
             match list with
             | []  ->          None
-            | [a] ->
-                if a = x then Some(start) 
-                else          None
             | h :: t -> 
                 if h = x then Some(start)
                 else getIndex t (start + 1)
@@ -34,7 +31,7 @@ module SimpleAlgorithms =
             | (h1 :: t1, h2 :: t2)  -> 
                 if h1 <> h2 then false
                 else areEqual (t1, t2)
-            | (_,_)                 -> false
+            | (_, _)                -> false
 
         let list = Seq.toList s
         areEqual (list, List.rev list) 
