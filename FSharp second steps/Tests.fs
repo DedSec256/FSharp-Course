@@ -34,7 +34,7 @@ module Tests =
         (* Task 3.3 tests *)
         [<Test>]
         let ``calculate empty tree must throw ArgumentException`` () =
-            calculate Operation.Empty |> ignore |> 
+            calculate Operation.Empty |> 
             should throw typeof<System.ArgumentException>
 
         [<Test>]
