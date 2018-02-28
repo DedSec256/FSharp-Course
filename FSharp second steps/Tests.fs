@@ -28,8 +28,14 @@ module Tests =
 
         [<Test>]
         let ``square a tree ``() =
-            map (Tree(2, Tree(2, Tree.Null, Tree.Null), Tree.Null)) (fun x -> x * x) |> 
-            should equal (Tree(4, Tree(4, Tree.Null, Tree.Null), Tree.Null))
+            map (Tree(2, 
+                      Tree(2, Tree.Null, Tree.Null), 
+                      Tree.Null)
+                 ) (fun x -> x * x) |> 
+            should equal 
+                (Tree(4, 
+                      Tree(4, Tree.Null, Tree.Null), 
+                      Tree.Null))
 
         (* Task 3.3 tests *)
         [<Test>]
