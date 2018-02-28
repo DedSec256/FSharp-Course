@@ -39,7 +39,36 @@ module SimpleAlgorithms =
         let list = Seq.toList s
         areEqual (list, List.rev list) 
 
+    (* Task 2.4 *)
+    let rec mergeSort list = 
 
+        let splitList n list = 
+            let rec splitAcc n cont = function
+            | []             -> cont([], [])
+            | l when n = 0   -> cont([], l)
+            | h :: t -> splitAcc (n - 1) (fun acc -> cont(h :: fst acc, snd acc)) t
+
+            splitAcc n id list
+
+        let merge left right = 
+            let rec mergeRec left right cont =
+                match (left, right) with
+                | (l, []) -> cont l
+                | ([], r) -> cont r
+                | (h1 :: t1, h2 :: t2) -> 
+                    if h1 <= h2 then mergeRec t1 right (fun acc -> cont(h1 :: acc))
+                    else             mergeRec left t2  (fun acc -> cont(h2 :: acc))
+
+            mergeRec left right id
+
+        match (List.length list) with
+        | l when l <= 1 -> list
+        | len           ->  
+            let left, right = list |> splitList (len / 2) 
+            merge (mergeSort left) (mergeSort right)
+    
+
+    
 
 
     
