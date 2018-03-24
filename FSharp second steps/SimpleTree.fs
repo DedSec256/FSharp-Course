@@ -1,5 +1,7 @@
 ﻿namespace FSharp_second_steps
 
+open System
+
 module SimpleDataStructures = 
 
     (* Task 3.3 *)
@@ -13,12 +15,12 @@ module SimpleDataStructures =
     
     let rec calculate (tree : Operation) =
         match tree with
-        | Empty -> failwith "Nothing to calculate"
+        | Empty -> raise (System.ArgumentException "Nothing to calculate")
         | Value(x) -> x
         | Mult(x, y) -> calculate(x) * calculate(y)
         | Div(x, y) -> if (calculate y) <> 0
                        then calculate(x) / calculate(y)
-                       else failwith "Wrong operation: cannot divide by zero"
+                       else raise (System.DivideByZeroException "Wrong operation: cannot divide by zero")
         | Add(x, y) -> calculate(x) + calculate(y)
         | Sub(x, y) -> calculate(x) - calculate(y)
 
