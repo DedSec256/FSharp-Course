@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Phonebook.fs" />
+    <Compile Include="PointFree.fs" />
+    <Compile Include="Validator.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FsCheck" Version="2.10.8" />
+    <PackageReference Include="FsUnit" Version="3.1.0" />
+    <PackageReference Include="NUnit" Version="3.10.1" />
+  </ItemGroup>
+
+</Project>
