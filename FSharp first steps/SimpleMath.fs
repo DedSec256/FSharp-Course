@@ -3,7 +3,10 @@
 module SimpleMath =
 
      (* Task 1.1 *)
-     let (!) n : int = [2..n] |> List.reduce (*) 
+     let (!) n : int = 
+        match n with 
+        | 0 -> 1
+        | x -> [1..x] |> List.reduce (*) 
     
      (* Task 1.4 *)
      let degreesOfTwoGenerator n m =
