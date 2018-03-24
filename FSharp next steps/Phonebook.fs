@@ -107,9 +107,6 @@ module TerminalCommands =
                                             saveToFile records path
                                             records
                                             with
-                                               | :?   FileNotFoundException ->
-                                                      printfn "Не удалось сохранить данные: неверный путь"
-                                                      records
                                                | _ -> 
                                                       printfn "Не удалось сохранить данные"
                                                       records)
