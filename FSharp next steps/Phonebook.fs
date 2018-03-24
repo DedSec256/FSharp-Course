@@ -17,8 +17,8 @@ let parseRecord (line : string) =
     let newData = line.Split(separator)
     { Name = newData.[0]; Phone = newData.[1]}
 
-(* Очень важная часть для соблюдения принципа OCP - 
- * вдруг мы захотим масштабирования - больше команд терминала? *)
+(* Очень важная часть для соблюдения принципа OCP 
+ * при масштабировании - вдруг мы захотим больше команд терминала? *)
 type CallbackDelegate = delegate of List<Record> -> List<Record>
 type Command = 
     {  
