@@ -6,23 +6,24 @@ module SimpleDataStructures =
 
     (* Task 3.3 *)
     type Operation =
-        | Empty
         | Value of int 
         | Add of Operation * Operation
         | Sub of Operation * Operation
         | Mult of Operation * Operation
         | Div of Operation * Operation
     
-    let rec calculate (tree : Operation) =
+    let rec calculate (tree : Operation option) =
         match tree with
-        | Empty -> raise (System.ArgumentException "Nothing to calculate")
-        | Value(x) -> x
-        | Mult(x, y) -> calculate(x) * calculate(y)
-        | Div(x, y) -> if (calculate y) <> 0
-                       then calculate(x) / calculate(y)
-                       else raise (System.DivideByZeroException "Wrong operation: cannot divide by zero")
-        | Add(x, y) -> calculate(x) + calculate(y)
-        | Sub(x, y) -> calculate(x) - calculate(y)
+        | None -> raise (System.ArgumentException "Nothing to calculate")
+        | Some(t) ->
+            match t with
+            | Value(x) -> x
+            | Mult(x, y) -> calculate(Some(x)) * calculate(Some(y))
+            | Div(x, y) -> if (calculate (Some(y))) <> 0
+                           then calculate(Some(x)) / calculate(Some(y))
+                           else raise (System.DivideByZeroException "Wrong operation: cannot divide by zero")
+            | Add(x, y) -> calculate(Some(x)) + calculate(Some(y))
+            | Sub(x, y) -> calculate(Some(x)) - calculate(Some(y))
 
     (* Task 3.4 *)
     let generatePrimeSeq() = 
