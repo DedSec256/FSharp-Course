@@ -7,14 +7,14 @@ open System.Collections.Generic
 module BST =
 
     /// <summary>
-    /// Ячейка дерева
+    /// РЇС‡РµР№РєР° РґРµСЂРµРІР°
     /// </summary>
     type Node<'a> =
         | Node of 'a * Node<'a> * Node<'a>
         | Empty 
         with
             override this.ToString() = 
-                (* Добавляет красивую табуляцию для красивой отрисовки *)
+                (* Р”РѕР±Р°РІР»СЏРµС‚ РєСЂР°СЃРёРІСѓСЋ С‚Р°Р±СѓР»СЏС†РёСЋ РґР»СЏ РєСЂР°СЃРёРІРѕР№ РѕС‚СЂРёСЃРѕРІРєРё *)
                 let tab(n) =
                     let sB = new StringBuilder(n + 1)
                     sB.Append('\t', n).ToString()
@@ -28,13 +28,13 @@ module BST =
                 recToString this 2
 
     /// <summary>
-    /// Двоичное дерево поиска для сравниваемых типов
+    /// Р”РІРѕРёС‡РЅРѕРµ РґРµСЂРµРІРѕ РїРѕРёСЃРєР° РґР»СЏ СЃСЂР°РІРЅРёРІР°РµРјС‹С… С‚РёРїРѕРІ
     /// </summary>
     type Tree<'a when 'a: comparison>() =
 
-        (* Корень дерева. Ваш кэп. *)
+        (* РљРѕСЂРµРЅСЊ РґРµСЂРµРІР°. Р’Р°С€ РєСЌРї. *)
         let mutable root = Empty 
-        (* Размер дерева. Ваш кэп. *)
+        (* Р Р°Р·РјРµСЂ РґРµСЂРµРІР°. Р’Р°С€ РєСЌРї. *)
         let mutable size = 0
 
         member this.Size 
@@ -47,14 +47,14 @@ module BST =
             root.ToString()
        
         /// <summary>
-        /// Очищает дерево. Ваш кэп
+        /// РћС‡РёС‰Р°РµС‚ РґРµСЂРµРІРѕ. Р’Р°С€ РєСЌРї
         /// </summary>
         member this.Clear() = 
             root <- Empty
             size <- 0
         
         interface IEnumerable<'a> with        
-            (* Enumerator для последовательного обхода дерева (отсортированного по возрастанию) *)
+            (* Enumerator РґР»СЏ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕРіРѕ РѕР±С…РѕРґР° РґРµСЂРµРІР° (РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕРіРѕ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ) *)
             member this.GetEnumerator() =               
                 let rec enumerateRec node =
                     seq {
@@ -68,13 +68,13 @@ module BST =
                     }
                 (enumerateRec root).GetEnumerator()
 
-            (* Enumerator, которым никто не пользуется :/ *)
+            (* Enumerator, РєРѕС‚РѕСЂС‹Рј РЅРёРєС‚Рѕ РЅРµ РїРѕР»СЊР·СѓРµС‚СЃСЏ :/ *)
             member this.GetEnumerator(): IEnumerator = 
                (this :> IEnumerable<'a>).GetEnumerator() :> IEnumerator
        
         /// <summary>
-        /// Добавить значение в дерево. Ваш кэп.
-        /// Поддерживает текучий синтаксис Tree.Add(123).Add(122)...
+        /// Р”РѕР±Р°РІРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ РІ РґРµСЂРµРІРѕ. Р’Р°С€ РєСЌРї.
+        /// РџРѕРґРґРµСЂР¶РёРІР°РµС‚ С‚РµРєСѓС‡РёР№ СЃРёРЅС‚Р°РєСЃРёСЃ Tree.Add(123).Add(122)...
         /// </summary>
         member this.Add(data) = 
             let rec recAdd data startNode = 
@@ -83,14 +83,14 @@ module BST =
                 | Node(x, l, r) -> match data with  
                                    | data when data < x -> Node(x, recAdd data l, r)
                                    | data when data > x -> Node(x, l, recAdd data r)
-                                   | _ -> size <- size - 1 (* Если такой элемент уже существует *)
+                                   | _ -> size <- size - 1 (* Р•СЃР»Рё С‚Р°РєРѕР№ СЌР»РµРјРµРЅС‚ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ *)
                                           Node(x, l, r)
             size <- size + 1
             root <- recAdd data root
             this
 
         /// <summary>
-        /// Есть ли элемент со значением data в дереве. Ваш кэп.
+        /// Р•СЃС‚СЊ Р»Рё СЌР»РµРјРµРЅС‚ СЃРѕ Р·РЅР°С‡РµРЅРёРµРј data РІ РґРµСЂРµРІРµ. Р’Р°С€ РєСЌРї.
         /// </summary>
         member this.Contains(data) =
             let rec recContains data startNode =
@@ -103,12 +103,12 @@ module BST =
             recContains data root
 
         /// <summary>
-        /// Есть ли элемент со значением data в дереве. Ваш кэп.
-        /// Поддерживает текучий синтаксис Tree.Remove(123).Remove(122)...
+        /// Р•СЃС‚СЊ Р»Рё СЌР»РµРјРµРЅС‚ СЃРѕ Р·РЅР°С‡РµРЅРёРµРј data РІ РґРµСЂРµРІРµ. Р’Р°С€ РєСЌРї.
+        /// РџРѕРґРґРµСЂР¶РёРІР°РµС‚ С‚РµРєСѓС‡РёР№ СЃРёРЅС‚Р°РєСЃРёСЃ Tree.Remove(123).Remove(122)...
         /// </summary>
         member this.Remove(data) = 
 
-            (* Получает самую левую ячейку в дереве/поддереве, поиск начинается с node *)
+            (* РџРѕР»СѓС‡Р°РµС‚ СЃР°РјСѓСЋ Р»РµРІСѓСЋ СЏС‡РµР№РєСѓ РІ РґРµСЂРµРІРµ/РїРѕРґРґРµСЂРµРІРµ, РїРѕРёСЃРє РЅР°С‡РёРЅР°РµС‚СЃСЏ СЃ node *)
             let rec recGetMin (node: Node<'a>) = 
                 match node with
                 | Node(_, l, _) -> match l with
@@ -118,7 +118,7 @@ module BST =
 
             let rec recRemove data node = 
                 match node with 
-                | Empty -> size <- size + 1 (* Нивелируем size <- size - 1, если дерево пустое *)
+                | Empty -> size <- size + 1 (* РќРёРІРµР»РёСЂСѓРµРј size <- size - 1, РµСЃР»Рё РґРµСЂРµРІРѕ РїСѓСЃС‚РѕРµ *)
                            Empty
                 | Node(x, l, r) -> match data with
                                    | data when data < x -> Node(x, recRemove data l, r)
