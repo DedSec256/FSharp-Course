@@ -6,21 +6,21 @@ open System.Text.RegularExpressions
 
 module Downloader =
     /// <summary>
-    /// Описывает результирующий статус загрузки
+    /// РћРїРёСЃС‹РІР°РµС‚ СЂРµР·СѓР»СЊС‚РёСЂСѓСЋС‰РёР№ СЃС‚Р°С‚СѓСЃ Р·Р°РіСЂСѓР·РєРё
     /// </summary>
     type DownloadStatus<'a> = 
-       |Done of 'a      (* Успешная загрузка:   'a - данные загрузки          *)
-       |Error of string (* Ошибка при загрузке: string - информация об ошибке *)
+       |Done of 'a      (* РЈСЃРїРµС€РЅР°СЏ Р·Р°РіСЂСѓР·РєР°:   'a - РґР°РЅРЅС‹Рµ Р·Р°РіСЂСѓР·РєРё          *)
+       |Error of string (* РћС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ: string - РёРЅС„РѕСЂРјР°С†РёСЏ РѕР± РѕС€РёР±РєРµ *)
 
     /// <summary>
-    /// Возвращает размер страниц, на которые ссылается страница с url, включая её саму
+    /// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЂР°Р·РјРµСЂ СЃС‚СЂР°РЅРёС†, РЅР° РєРѕС‚РѕСЂС‹Рµ СЃСЃС‹Р»Р°РµС‚СЃСЏ СЃС‚СЂР°РЅРёС†Р° СЃ url, РІРєР»СЋС‡Р°СЏ РµС‘ СЃР°РјСѓ
     /// </summary>
     let downloadAsync(url : string) =
 
-        (* Зашитое в сборку регулярное выражение для поиска ссылок *)
+        (* Р—Р°С€РёС‚РѕРµ РІ СЃР±РѕСЂРєСѓ СЂРµРіСѓР»СЏСЂРЅРѕРµ РІС‹СЂР°Р¶РµРЅРёРµ РґР»СЏ РїРѕРёСЃРєР° СЃСЃС‹Р»РѕРє *)
         let urlRegex = Regex("<a href\s*=\s*\"(https?://[^\"]+)\"\s*>", RegexOptions.Compiled)
 		
-        (* Асинхронно загружает страницу с _url *)
+        (* РђСЃРёРЅС…СЂРѕРЅРЅРѕ Р·Р°РіСЂСѓР¶Р°РµС‚ СЃС‚СЂР°РЅРёС†Сѓ СЃ _url *)
         let downloadPageAsync (_url : string) = 
             async {
                 try
@@ -34,11 +34,11 @@ module Downloader =
                 | error -> return (_url, Error(error.Message))
             }
 
-        (* Получаем результат загрузки основной страницы *)
+        (* РџРѕР»СѓС‡Р°РµРј СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РіСЂСѓР·РєРё РѕСЃРЅРѕРІРЅРѕР№ СЃС‚СЂР°РЅРёС†С‹ *)
         let mainHtmlResult = downloadPageAsync(url) |> Async.RunSynchronously
         match mainHtmlResult with 
         | (_, Done(htmlDocument)) ->
-                                (* Асинхронно загружаем все страницы, на которые ссылается основная *)
+                                (* РђСЃРёРЅС…СЂРѕРЅРЅРѕ Р·Р°РіСЂСѓР¶Р°РµРј РІСЃРµ СЃС‚СЂР°РЅРёС†С‹, РЅР° РєРѕС‚РѕСЂС‹Рµ СЃСЃС‹Р»Р°РµС‚СЃСЏ РѕСЃРЅРѕРІРЅР°СЏ *)
                                 let matches = urlRegex.Matches(htmlDocument)
                                 let tasks = [for _match in matches -> downloadPageAsync(_match.Groups.[1].Value)]
                                 let results = Async.Parallel tasks |> Async.RunSynchronously
@@ -47,7 +47,7 @@ module Downloader =
         | _ -> [mainHtmlResult]
 
     /// <summary>
-    /// Распечатывает результат работы функции downloadAsync
+    /// Р Р°СЃРїРµС‡Р°С‚С‹РІР°РµС‚ СЂРµР·СѓР»СЊС‚Р°С‚ СЂР°Р±РѕС‚С‹ С„СѓРЅРєС†РёРё downloadAsync
     /// </summary>
     let printDownloadData(url) =
         let results = downloadAsync(url)
@@ -55,5 +55,3 @@ module Downloader =
             match result with
             | (_url, Done(x)) -> printfn "[%s - %d symbols]" _url x.Length
             | (_url, Error(x)) -> printfn "[%s - error: %s]" _url x
-
-            
