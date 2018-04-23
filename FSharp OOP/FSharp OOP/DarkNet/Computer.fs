@@ -41,11 +41,11 @@ module Computer =
         let criticalPossibility = 
             match OS with
             | Windows -> 60
-            | Linux -> 10
-            | MacOS -> 1
+            | Linux -> 15
+            | MacOS -> 5
             | SunOS -> 50 //DeadOS :c
             | ChromeOS -> 80
-            | DOS -> 0
+            | DOS -> 1
             | _ -> raise (new ArgumentException("Invalid OS (or I forgot to add :D )"))
 
         (* ОС Компьютера. Ваш кэп. *)
