@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Phonebook\View.fs" />
+    <Compile Include="Phonebook\Types.fs" />
+    <Compile Include="Phonebook\Modules.fs" />
+    <Compile Include="Validator.fs" />
+  </ItemGroup>
+
+</Project>
