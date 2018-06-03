@@ -12,7 +12,7 @@ module Interpreter =
     let inline (.<) (x : char      ) (A : LambdaTerm) = Abstraction(x, A)
     let inline (^)  (A : LambdaTerm) (x : char      ) = (A, x)
 
-    (* Получаем имена свободных переменных *)
+    (* РџРѕР»СѓС‡Р°РµРј РёРјРµРЅР° СЃРІРѕР±РѕРґРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С… *)
     let getFV term =
         let rec getRecFV t vars =
             match t with
@@ -21,18 +21,18 @@ module Interpreter =
             | Abstraction(x, S) -> (getRecFV S vars) |> List.filter(fun v -> v <> x)
         getRecFV term []
 
-    let ruAlphabet = Set(['а'..'я'])
+    let ruAlphabet = Set(['Р°'..'СЏ'])
     let enAlphabet = Set(['a'..'z'])
-    (* Получаем свободное имя, не конфликтующее ни в A, ни в B *)
+    (* РџРѕР»СѓС‡Р°РµРј СЃРІРѕР±РѕРґРЅРѕРµ РёРјСЏ, РЅРµ РєРѕРЅС„Р»РёРєС‚СѓСЋС‰РµРµ РЅРё РІ A, РЅРё РІ B *)
     let getFreeName A B = 
         let allFV = (getFV A) @ (getFV B) |> Set.ofList
         let freeNames = (enAlphabet - allFV) |> Set.toList
         if  freeNames = list.Empty then
-            (* Как говорил Билл Гейтс: "Букв из двух алфавитов хватит на всё!" *)
+            (* РљР°Рє РіРѕРІРѕСЂРёР» Р‘РёР»Р» Р“РµР№С‚СЃ: "Р‘СѓРєРІ РёР· РґРІСѓС… Р°Р»С„Р°РІРёС‚РѕРІ С…РІР°С‚РёС‚ РЅР° РІСЃС‘!" *)
             (ruAlphabet - allFV) |> Set.toList |> List.head 
         else freeNames |> List.head
     
-    (* Заменяем x из A на B *)
+    (* Р—Р°РјРµРЅСЏРµРј x РёР· A РЅР° B *)
     let rec (<=) (A, x) B =
         let rec substitute A x B =
             match A with
@@ -49,7 +49,7 @@ module Interpreter =
                     freeVar .< (T^x <= B)
         substitute A x B
     
-    (* Сама бета-редукция *)
+    (* РЎР°РјР° Р±РµС‚Р°-СЂРµРґСѓРєС†РёСЏ *)
     let rec (~&) A = 
         let rec betaReduce term =
             match term with
