@@ -45,8 +45,10 @@ type MultiThreadedLazy<'a> (supplier : unit -> 'a) =
     override this.Get() =
         if Interlocked.Equals(this.isValueCreated, false)
             then lock(lockObj) (fun () -> 
-                                this.value          <- supplier()
-                                this.isValueCreated <- true)                                
+                                if Interlocked.Equals(this.isValueCreated, false)
+                                then
+                                  this.value          <- supplier()
+                                  this.isValueCreated <- true)                                
         this.value
     
 /// <summary>
