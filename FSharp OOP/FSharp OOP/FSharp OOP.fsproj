@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="BFS.fs" />
+    <Compile Include="DarkNet\Computer.fs" />
+    <Compile Include="DarkNet\DarkNet.fs" />
+  </ItemGroup>
+
+</Project>
