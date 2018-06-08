@@ -63,9 +63,4 @@ module SimpleAlgorithms =
         | len           ->  
             let left, right = list |> splitList (len / 2) 
             merge (mergeSort left) (mergeSort right)
-    
-
-    
-
-
-    
+   
